@@ -1,5 +1,7 @@
-import Negociacao from "./models/Negociacao.js";
-const negociacao = new Negociacao(new Date(), 100, 10);
-console.log(negociacao.quantidade);
-console.log(negociacao.data);
-console.log(negociacao.valor);
+import NegociacaoController from "./controllers/NegociacaoController.js";
+const form = document.querySelector('.form');
+const negociacao = new NegociacaoController();
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    negociacao.adiciona();
+});
