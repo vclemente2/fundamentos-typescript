@@ -1,22 +1,19 @@
-export default class MensagemView{
-    private element:HTMLElement;
+import View from "./View.js";
 
-    constructor(element:HTMLElement){
-        this.element = element
-    }
+export default class MensagemView extends View<string>{
 
-    template():string{
+    template(model:string):string{
         return `
-            <p>Negociação registrada com sucesso!</p>
+            <p class="alert alert-info">${model}</p>
         `
     }
 
-    update():void{
-        this.element.innerHTML = this.template();
+    update(model:string):void{
+        super.update(model);
         this.limpaMensagem();
     }
 
     limpaMensagem():void{
-        setTimeout(()=>{this.element.innerHTML = ""}, 2000)
+        setTimeout(()=>{this.elemento.innerHTML = ""}, 2000)
     }
 }

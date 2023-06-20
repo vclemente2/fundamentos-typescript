@@ -12,12 +12,12 @@ export default class NegociacaoController{
     private mensagemView: MensagemView;
 
     constructor(){
-        this._dataInput = document.querySelector('#data'),
-        this._quantidadeInput = document.querySelector('#quantidade'),
-        this._valorInput = document.querySelector('#valor')
-        this.negociacaoView = new NegociacaoView(document.querySelector('[data-tableContainer]'))
-        this.negociacaoView.update(this.negociacoes)
-        this.mensagemView = new MensagemView(document.querySelector('#mensagemView'))
+        this._dataInput = document.querySelector('#data');
+        this._quantidadeInput = document.querySelector('#quantidade');
+        this._valorInput = document.querySelector('#valor');
+        this.negociacaoView = new NegociacaoView('[data-tableContainer]');
+        this.negociacaoView.update(this.negociacoes);
+        this.mensagemView = new MensagemView('#mensagemView')
     }
 
     criaNegociacao(): Negociacao{
@@ -33,7 +33,7 @@ export default class NegociacaoController{
        const negociacao = this.criaNegociacao();
        this.negociacoes.adiciona(negociacao);
        this.negociacaoView.update(this.negociacoes);
-       this.mensagemView.update();
+       this.mensagemView.update('Negociação registrada com sucesso!');
        this.limpaFormulario();
     }
 
