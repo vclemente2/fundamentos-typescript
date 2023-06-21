@@ -10,6 +10,8 @@ export default class MensagemView extends View {
         `;
     }
     limpaMensagem() {
-        setTimeout(() => { this.elemento.innerHTML = ""; }, 2000);
+        setTimeout(() => {
+            this.elemento.innerHTML = "";
+        }, 2000);
     }
 }
