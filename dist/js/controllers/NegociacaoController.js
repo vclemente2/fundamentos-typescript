@@ -4,8 +4,13 @@ import Negociacoes from "../models/Negociacoes.js";
 import MensagemView from "../views/MensagemView.js";
 import NegociacaoView from "../views/NegociacaoView.js";
 export default class NegociacaoController {
+    _dataInput;
+    _quantidadeInput;
+    _valorInput;
+    negociacoes = new Negociacoes();
+    negociacaoView;
+    mensagemView;
     constructor() {
-        this.negociacoes = new Negociacoes();
         this._dataInput = document.querySelector("#data");
         this._quantidadeInput = document.querySelector("#quantidade");
         this._valorInput = document.querySelector("#valor");

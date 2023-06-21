@@ -2,7 +2,14 @@ export default abstract class View<T> {
   protected elemento: HTMLElement;
 
   constructor(seletor: string) {
-    this.elemento = document.querySelector(seletor);
+    const elemento: HTMLElement | null = document.querySelector(seletor);
+    if (elemento) {
+      this.elemento = elemento;
+    } else {
+      throw new Error(
+        `O seletor ${seletor} não existe no DOM. Favor verificar`
+      );
+    }
   }
 
   public update(model: T): void {
