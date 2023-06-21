@@ -12,21 +12,24 @@ export default class NegociacaoController {
         this.negociacaoView.update(this.negociacoes);
         this.mensagemView = new MensagemView('#mensagemView');
     }
-    criaNegociacao() {
-        const negociacao = new Negociacao(new Date(this._dataInput.value), parseInt(this._quantidadeInput.value), parseFloat(this._valorInput.value));
-        return negociacao;
-    }
     adiciona() {
         const negociacao = this.criaNegociacao();
         this.negociacoes.adiciona(negociacao);
-        this.negociacaoView.update(this.negociacoes);
-        this.mensagemView.update('Negociação registrada com sucesso!');
         this.limpaFormulario();
+        this.atualizaView();
     }
     limpaFormulario() {
         this._dataInput.value = '';
         this._quantidadeInput.value = '';
         this._valorInput.value = '';
         this._dataInput.focus();
+    }
+    criaNegociacao() {
+        const negociacao = new Negociacao(new Date(this._dataInput.value), parseInt(this._quantidadeInput.value), parseFloat(this._valorInput.value));
+        return negociacao;
+    }
+    atualizaView() {
+        this.negociacaoView.update(this.negociacoes);
+        this.mensagemView.update('Negociação registrada com sucesso!');
     }
 }

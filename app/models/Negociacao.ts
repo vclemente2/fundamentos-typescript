@@ -6,7 +6,7 @@ export default class Negociacao {
     public readonly valor: number
   ) {}
 
-  volume(): number{
+  public volume(): number{
     return this.quantidade * this.valor;
   }
 }
