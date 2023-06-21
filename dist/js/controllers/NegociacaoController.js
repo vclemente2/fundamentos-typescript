@@ -29,23 +29,4 @@ export default class NegociacaoController {
         this._valorInput.value = '';
         this._dataInput.focus();
     }
-    renderizaTabela() {
-        this.negociacoes;
-        const tableContainer = document.querySelector('[data-tableContainer]');
-        tableContainer.innerHTML = `
-       <table class="table table-hover table-bordered" data-table>
-            <thead>
-                <tr>
-                    <th>DATA</th>
-                    <th>QUANTIDADE</th>
-                    <th>VALOR</th>
-                </tr>
-            </thead>
-            <tbody>
-            ${this.negociacoes.montaTabela()}
-            </tbody>
-       </table>
-       `;
-        return tableContainer;
-    }
 }

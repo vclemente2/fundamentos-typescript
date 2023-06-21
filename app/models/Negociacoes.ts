@@ -11,17 +11,4 @@ export default class Negociacoes{
         return this.negociacoes;
     }
 
-    montaTabela(): String{
-       const negociacoesTable: String = this.negociacoes.map((negociacao: Negociacao):String => {
-            return `
-                <tr>
-                    <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
-                    <td>${negociacao.quantidade}</td>
-                    <td>${negociacao.valor}</td>
-                </tr>
-            `
-        }).join('')
-
-        return negociacoesTable;
-    }
 }

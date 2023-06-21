@@ -11,9 +11,21 @@ export default class NegociacaoView extends View {
                  </tr>
              </thead>
              <tbody>
-                ${model.montaTabela()}
+                ${this.montaTabela(model)}
              </tbody>
         </table>
         `;
+    }
+    montaTabela(model) {
+        const negociacoesTable = model.lista().map((negociacao) => {
+            return `
+                 <tr>
+                     <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                     <td>${negociacao.quantidade}</td>
+                     <td>${negociacao.valor}</td>
+                 </tr>
+             `;
+        }).join('');
+        return negociacoesTable;
     }
 }

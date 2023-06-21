@@ -5,9 +5,7 @@ export default abstract class View<T>{
         this.elemento = document.querySelector(seletor)
     }
 
-    template(model:T):string{
-        throw new Error('A classe filha deve implementar o módulo')
-    }
+   protected abstract template(model:T):string;
 
     update(model:T):void{
         this.elemento.innerHTML = this.template(model);
