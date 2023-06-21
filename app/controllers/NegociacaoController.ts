@@ -1,3 +1,4 @@
+import { DiasDaSemana } from "../enums/diasDaSemana.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
 import MensagemView from "../views/MensagemView.js";
@@ -21,7 +22,11 @@ export default class NegociacaoController {
   }
 
   public adiciona(): void {
-    const negociacao: Negociacao = this.criaNegociacao();
+    const negociacao: Negociacao = Negociacao.cria(
+      this._dataInput.value,
+      this._quantidadeInput.value,
+      this._valorInput.value
+    );
     const ehdiaUtil: boolean = this.ehDiaUtil(negociacao.data);
 
     if (!ehdiaUtil) {
@@ -43,21 +48,15 @@ export default class NegociacaoController {
     this._dataInput.focus();
   }
 
-  private criaNegociacao(): Negociacao {
-    const negociacao = new Negociacao(
-      new Date(this._dataInput.value),
-      parseInt(this._quantidadeInput.value),
-      parseFloat(this._valorInput.value)
-    );
-    return negociacao;
-  }
-
   private atualizaView(): void {
     this.negociacaoView.update(this.negociacoes);
     this.mensagemView.update("Negociação registrada com sucesso!");
   }
 
   private ehDiaUtil(data: Date): boolean {
-    return data.getDay() > 0 && data.getDay() < 6;
+    return (
+      data.getDay() > DiasDaSemana.DOMINGO &&
+      data.getDay() < DiasDaSemana.SABADO
+    );
   }
 }

@@ -7,4 +7,7 @@ export default class Negociacao {
     volume() {
         return this.quantidade * this.valor;
     }
+    static cria(data, quantidade, valor) {
+        return new Negociacao(new Date(data), parseInt(quantidade), parseFloat(valor));
+    }
 }
