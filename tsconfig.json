@@ -1,11 +1,13 @@
 {
     "compilerOptions": {
-        "outDir": "dist/js",
+        "outDir": "app/dist/js",
         "target": "ES2022",
         "noEmitOnError": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
         "removeComments": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
 
         "strict": true,
         "noUnusedLocals": true,

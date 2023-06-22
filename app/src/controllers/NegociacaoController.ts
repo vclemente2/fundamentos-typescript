@@ -1,3 +1,4 @@
+import { imprimirTempoDeExecucao } from "../decorator/imprimirTempoDeExecucao.js";
 import { DiasDaSemana } from "../enums/diasDaSemana.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
@@ -23,6 +24,7 @@ export default class NegociacaoController {
     this.mensagemView = new MensagemView("#mensagemView");
   }
 
+  @imprimirTempoDeExecucao()
   public adiciona(): void {
     const negociacao: Negociacao = Negociacao.cria(
       this._dataInput.value,
