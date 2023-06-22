@@ -1,3 +1,5 @@
+import { inspect } from "../decorator/inspect.js";
+
 export default abstract class View<T> {
   protected elemento: HTMLElement;
 
@@ -12,6 +14,7 @@ export default abstract class View<T> {
     }
   }
 
+  @inspect
   public update(model: T): void {
     this.elemento.innerHTML = this.template(model);
   }
