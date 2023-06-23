@@ -11,3 +11,13 @@ if (form) {
 } else {
   throw new Error("Não foi possível inicializar a aplicação.");
 }
+
+const btnImporta: HTMLElement = <HTMLElement>(
+  document.querySelector("[data-btnImporta]")
+);
+
+if (btnImporta) {
+  btnImporta.addEventListener("click", () => {
+    negociacao.importaDados();
+  });
+}

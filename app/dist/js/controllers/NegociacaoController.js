@@ -37,6 +37,21 @@ export default class NegociacaoController {
         this.limpaFormulario();
         this.atualizaView();
     }
+    importaDados() {
+        fetch("http://localhost:8080/dados")
+            .then((res) => res.json())
+            .then((data) => {
+            return data.map((item) => {
+                return Negociacao.cria(String(new Date()), item.vezes, item.montante);
+            });
+        })
+            .then((arrNegociacao) => {
+            arrNegociacao.forEach((negociacao) => {
+                this.negociacoes.adiciona(negociacao);
+            });
+            this.negociacaoView.update(this.negociacoes);
+        });
+    }
     limpaFormulario() {
         this._dataInput.value = "";
         this._quantidadeInput.value = "";
@@ -53,6 +68,6 @@ export default class NegociacaoController {
     }
 }
 __decorate([
-    inspect,
-    imprimirTempoDeExecucao(true)
+    imprimirTempoDeExecucao(true),
+    inspect
 ], NegociacaoController.prototype, "adiciona", null);

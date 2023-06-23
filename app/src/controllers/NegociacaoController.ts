@@ -25,8 +25,8 @@ export default class NegociacaoController {
     this.mensagemView = new MensagemView("#mensagemView");
   }
 
-  @inspect
   @imprimirTempoDeExecucao(true)
+  @inspect
   public adiciona(): void {
     const negociacao: Negociacao = Negociacao.cria(
       this._dataInput.value,
@@ -45,6 +45,22 @@ export default class NegociacaoController {
     this.negociacoes.adiciona(negociacao);
     this.limpaFormulario();
     this.atualizaView();
+  }
+
+  public importaDados() {
+    fetch("http://localhost:8080/dados")
+      .then((res: Response): Promise<any> => res.json())
+      .then((data: Array<any>): Array<Negociacao> => {
+        return data.map((item) => {
+          return Negociacao.cria(String(new Date()), item.vezes, item.montante);
+        });
+      })
+      .then((arrNegociacao: Negociacao[]): void => {
+        arrNegociacao.forEach((negociacao: Negociacao) => {
+          this.negociacoes.adiciona(negociacao);
+        });
+        this.negociacaoView.update(this.negociacoes);
+      });
   }
 
   private limpaFormulario(): void {

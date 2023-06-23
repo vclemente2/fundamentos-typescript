@@ -1,6 +1,6 @@
 export function escape(
   _: any,
-  propertyKey: string,
+  __: string,
   descriptor: PropertyDescriptor
 ): PropertyDescriptor {
   const metodoOriginal = descriptor.value;
@@ -8,9 +8,9 @@ export function escape(
   descriptor.value = function (...args: Array<any>) {
     let retorno = metodoOriginal.apply(this, args);
     if (typeof retorno === "string") {
-      console.log(
-        `@escape executado na classe: ${this.constructor.name} para o método ${propertyKey}`
-      );
+      // console.log(
+      //   `@escape executado na classe: ${this.constructor.name} para o método ${propertyKey}`
+      // );
       retorno = retorno.replace(/<script>[\s\S]*?<\/script>/, "");
     }
     return retorno;

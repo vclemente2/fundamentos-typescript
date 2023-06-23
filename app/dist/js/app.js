@@ -10,3 +10,9 @@ if (form) {
 else {
     throw new Error("Não foi possível inicializar a aplicação.");
 }
+const btnImporta = (document.querySelector("[data-btnImporta]"));
+if (btnImporta) {
+    btnImporta.addEventListener("click", () => {
+        negociacao.importaDados();
+    });
+}
