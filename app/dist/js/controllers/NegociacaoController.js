@@ -9,6 +9,7 @@ import { inspect } from "../decorator/inspect.js";
 import { DiasDaSemana } from "../enums/diasDaSemana.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
+import { NegociacoesService } from "../services/NegociacoesService.js";
 import MensagemView from "../views/MensagemView.js";
 import NegociacaoView from "../views/NegociacaoView.js";
 export default class NegociacaoController {
@@ -37,20 +38,12 @@ export default class NegociacaoController {
         this.limpaFormulario();
         this.atualizaView();
     }
-    importaDados() {
-        fetch("http://localhost:8080/dados")
-            .then((res) => res.json())
-            .then((data) => {
-            return data.map((item) => {
-                return new Negociacao(new Date(), item.vezes, item.montante);
-            });
-        })
-            .then((arrNegociacao) => {
-            arrNegociacao.forEach((negociacao) => {
-                this.negociacoes.adiciona(negociacao);
-            });
-            this.negociacaoView.update(this.negociacoes);
+    async importaDados() {
+        const negociacoes = await NegociacoesService.obterNegociacoes();
+        negociacoes.forEach((negociacao) => {
+            this.negociacoes.adiciona(negociacao);
         });
+        this.negociacaoView.update(this.negociacoes);
     }
     limpaFormulario() {
         this._dataInput.value = "";

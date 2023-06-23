@@ -1,9 +1,9 @@
 import { imprimirTempoDeExecucao } from "../decorator/imprimirTempoDeExecucao.js";
 import { inspect } from "../decorator/inspect.js";
 import { DiasDaSemana } from "../enums/diasDaSemana.js";
-import { NegociacaoDoDia } from "../interfaces/NegociacaoDoDia.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
+import { NegociacoesService } from "../services/NegociacoesService.js";
 import MensagemView from "../views/MensagemView.js";
 import NegociacaoView from "../views/NegociacaoView.js";
 
@@ -14,6 +14,7 @@ export default class NegociacaoController {
   private negociacoes: Negociacoes = new Negociacoes();
   private negociacaoView: NegociacaoView;
   private mensagemView: MensagemView;
+  // private negociacoesService: NegociacoesService = new NegociacoesService();
 
   constructor() {
     this._dataInput = document.querySelector("#data") as HTMLInputElement;
@@ -48,20 +49,13 @@ export default class NegociacaoController {
     this.atualizaView();
   }
 
-  public importaDados() {
-    fetch("http://localhost:8080/dados")
-      .then((res: Response): Promise<any> => res.json())
-      .then((data: Array<NegociacaoDoDia>): Array<Negociacao> => {
-        return data.map((item: NegociacaoDoDia) => {
-          return new Negociacao(new Date(), item.vezes, item.montante);
-        });
-      })
-      .then((arrNegociacao: Negociacao[]): void => {
-        arrNegociacao.forEach((negociacao: Negociacao) => {
-          this.negociacoes.adiciona(negociacao);
-        });
-        this.negociacaoView.update(this.negociacoes);
-      });
+  public async importaDados(): Promise<any> {
+    const negociacoes = await NegociacoesService.obterNegociacoes();
+
+    negociacoes.forEach((negociacao: Negociacao) => {
+      this.negociacoes.adiciona(negociacao);
+    });
+    this.negociacaoView.update(this.negociacoes);
   }
 
   private limpaFormulario(): void {
