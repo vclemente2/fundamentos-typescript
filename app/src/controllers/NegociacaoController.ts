@@ -4,6 +4,7 @@ import { DiasDaSemana } from "../enums/diasDaSemana.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
 import { NegociacoesService } from "../services/NegociacoesService.js";
+import { imprimir } from "../utils/imprimir.js";
 import MensagemView from "../views/MensagemView.js";
 import NegociacaoView from "../views/NegociacaoView.js";
 
@@ -14,7 +15,6 @@ export default class NegociacaoController {
   private negociacoes: Negociacoes = new Negociacoes();
   private negociacaoView: NegociacaoView;
   private mensagemView: MensagemView;
-  // private negociacoesService: NegociacoesService = new NegociacoesService();
 
   constructor() {
     this._dataInput = document.querySelector("#data") as HTMLInputElement;
@@ -47,6 +47,7 @@ export default class NegociacaoController {
     this.negociacoes.adiciona(negociacao);
     this.limpaFormulario();
     this.atualizaView();
+    imprimir(negociacao, this.negociacoes);
   }
 
   public async importaDados(): Promise<any> {

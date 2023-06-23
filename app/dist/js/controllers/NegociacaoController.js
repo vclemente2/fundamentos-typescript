@@ -10,6 +10,7 @@ import { DiasDaSemana } from "../enums/diasDaSemana.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
 import { NegociacoesService } from "../services/NegociacoesService.js";
+import { imprimir } from "../utils/imprimir.js";
 import MensagemView from "../views/MensagemView.js";
 import NegociacaoView from "../views/NegociacaoView.js";
 export default class NegociacaoController {
@@ -37,6 +38,7 @@ export default class NegociacaoController {
         this.negociacoes.adiciona(negociacao);
         this.limpaFormulario();
         this.atualizaView();
+        imprimir(negociacao, this.negociacoes);
     }
     async importaDados() {
         const negociacoes = await NegociacoesService.obterNegociacoes();
