@@ -42,7 +42,7 @@ export default class NegociacaoController {
             .then((res) => res.json())
             .then((data) => {
             return data.map((item) => {
-                return Negociacao.cria(String(new Date()), item.vezes, item.montante);
+                return new Negociacao(new Date(), item.vezes, item.montante);
             });
         })
             .then((arrNegociacao) => {

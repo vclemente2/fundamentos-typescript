@@ -1,6 +1,7 @@
 import { imprimirTempoDeExecucao } from "../decorator/imprimirTempoDeExecucao.js";
 import { inspect } from "../decorator/inspect.js";
 import { DiasDaSemana } from "../enums/diasDaSemana.js";
+import { NegociacaoDoDia } from "../interfaces/NegociacaoDoDia.js";
 import Negociacao from "../models/Negociacao.js";
 import Negociacoes from "../models/Negociacoes.js";
 import MensagemView from "../views/MensagemView.js";
@@ -50,9 +51,9 @@ export default class NegociacaoController {
   public importaDados() {
     fetch("http://localhost:8080/dados")
       .then((res: Response): Promise<any> => res.json())
-      .then((data: Array<any>): Array<Negociacao> => {
-        return data.map((item) => {
-          return Negociacao.cria(String(new Date()), item.vezes, item.montante);
+      .then((data: Array<NegociacaoDoDia>): Array<Negociacao> => {
+        return data.map((item: NegociacaoDoDia) => {
+          return new Negociacao(new Date(), item.vezes, item.montante);
         });
       })
       .then((arrNegociacao: Negociacao[]): void => {
