@@ -1,5 +1,4 @@
-import { Imprimivel } from "../utils/Imprimivel.js";
-export default class Negociacoes extends Imprimivel {
+export default class Negociacoes {
     negociacoes = [];
     adiciona(negociacao) {
         this.negociacoes.push(negociacao);
